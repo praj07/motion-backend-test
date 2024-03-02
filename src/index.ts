@@ -22,7 +22,7 @@ type appUsageHeader = {
   total_time: number;
 };
 
-async function serveUserDetailsFromCache() {
+async function serveUserDetailsFromCache(): Promise<void> {
   // we want this function to be running for the duration of the rate limit window
   if (IS_DEVELOPMENT_ENVIRONMENT) console.log(`serveUserDetailsFromCache`);
   const startTime = Date.now();
@@ -41,7 +41,7 @@ async function serveUserDetailsFromCache() {
   console.log(`rate limit window duration window passed, returning to main loop`);
 }
 
-async function getUserDetails() {
+async function getUserDetails(): Promise<void> {
   console.log("Getting the user details");
   while (true) {
     //timeout for 2 seconds before attempting to call the api
@@ -104,10 +104,11 @@ async function getUserDetails() {
         await serveUserDetailsFromCache();
       } else if (error.res?.status == 400 || error.message.includes(400)) {
         console.log(`Invalid access token or the access token is expired`);
+        // TODO: allow user to input a new access token if their current one is invalid or expired
+        // alternatively, retrieve a new access token.
       } else {
         console.log("Unhandled error:", error.message);
       }
-      // TODO: if
     }
   }
 }
