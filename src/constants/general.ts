@@ -1,4 +1,5 @@
-export const CACHE_TTL_SECONDS = 3600;
-export const META_API_CALL_RATE_MS = 5000
+export const CACHE_TTL_SECONDS = 7200; // 2 hours
+export const META_API_CALL_RATE_MS = 2000 //2 seconds
+export const META_THROTTLE_ROLLING_WINDOW_TIME_MS = 3600000 // 1 hour
 
-export const USER_ID = `user123` // We'll be using this a unique identifier for the cache for the user who's calling the api
+export const META_USER_PROFILE_PARAMS = ["id", "name", "last_name"];
